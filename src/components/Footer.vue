@@ -10,17 +10,14 @@ export default {
 </script>
 <style scoped>
 footer {
-  height: 200px;
+  height: 12.5rem;
   background-color: #222;
-  border-top: 4px solid #111;
+  border-top: 0.25rem solid #111;
   color: #fcab03;
   display: flex;
   align-items: center;
   justify-content: center;
-  bottom: 0;
   width: 100%;
   position: absolute;
-}
-p {
 }
 </style>

@@ -26,13 +26,13 @@ export default {
   box-sizing: border-box;
 }
 .mainContainer {
-  margin: 50px;
-  min-width: 250px;
+  margin: 3.125rem;
+  min-width: 15.625rem;
 }
 h1 {
   text-align: center;
-  font-size: 42px;
-  margin-bottom: 30px;
+  font-size: 2.625rem;
+  margin-bottom: 1.875rem;
   color: #222;
 }
 </style>

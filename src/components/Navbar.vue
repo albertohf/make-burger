@@ -4,8 +4,8 @@
       <img src="../assets/burger.png" alt="Make Your Burger" id="logo" />
     </router-link>
     <div>
-      <router-link to="/">Home</router-link>
-      <router-link to="/requests">Requests</router-link>
+      <router-link to="/">Início</router-link>
+      <router-link to="/requests">Pedidos</router-link>
     </div>
   </div>
 </template>
