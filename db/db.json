@@ -80,38 +80,15 @@
   "burgers": [
     {
       "nome": "Alberto Henrique Fernandes",
-      "carnes": "Alcatra",
-      "pao": "Italiano Branco",
+      "carnes": "Picanha",
+      "pao": "Parmesão e Orégano",
       "opcionais": [
         "Bacon",
-        "Pepino"
+        "Cebola roxa",
+        "Cheddar"
       ],
-      "status": "Solicitado",
+      "status": "Em produção",
       "id": 1
-    },
-    {
-      "nome": "marcelo freitas",
-      "carnes": "Maminha",
-      "pao": "Integral",
-      "opcionais": [
-        "Bacon",
-        "Salame",
-        "Cebola roxa"
-      ],
-      "status": "Solicitado",
-      "id": 2
-    },
-    {
-      "nome": "solange maria",
-      "carnes": "Alcatra",
-      "pao": "3 Queijos",
-      "opcionais": [
-        "Bacon",
-        "Tomate",
-        "Cebola roxa"
-      ],
-      "status": "Solicitado",
-      "id": 3
     }
   ]
 }
