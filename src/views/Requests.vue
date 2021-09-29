@@ -1,5 +1,15 @@
 <template>
   <div class="mainContainer">
-    <h1>This is an requests page</h1>
+    <h1>Gerenciar Pedidos:</h1>
+    <Dashboard />
   </div>
 </template>
+<script>
+import Dashboard from "../components/Dashboard";
+export default {
+  name: "requests",
+  components: {
+    Dashboard,
+  },
+};
+</script>

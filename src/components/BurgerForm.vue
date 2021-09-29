@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p>Componente de mensagen</p>
+    <Message :msg="msg" v-show="msg" />
     <div>
-      <form id="burger-form">
+      <form id="burger-form" @submit="createBurger">
         <div class="input-container">
           <label for="Name">Nome do Cliente:</label>
           <input
@@ -17,15 +17,23 @@
           <label for="bread">Escolha o Pão:</label>
           <select name="bread" id="bread" v-model="bread">
             <option value="">Selecione seu pão</option>
-            <option value="integral">Integral</option>
+            <option
+              v-for="bread in breadsData"
+              :key="bread.id"
+              :value="bread.tipo"
+            >
+              {{ bread.tipo }}
+            </option>
           </select>
         </div>
 
         <div class="input-container">
           <label for="beef">Escolha a carne do seu Burger</label>
-          <select name="beef" id="beef" v-model="bread">
+          <select name="beef" id="beef" v-model="meat">
             <option value="">Selecione sua Carne</option>
-            <option value="maminha">maminha</option>
+            <option v-for="meat in meatsData" :key="meat.id" :value="meat.tipo">
+              {{ meat.tipo }}
+            </option>
           </select>
         </div>
 
@@ -33,14 +41,18 @@
           <label class="options-title" for="options"
             >Selecione os opcionais:</label
           >
-          <div class="checkbox-container">
+          <div
+            class="checkbox-container"
+            v-for="choice in choicesData"
+            :key="choice.id"
+          >
             <input
               type="checkbox"
-              name="options"
-              v-model="options"
-              value="Salame"
+              name="choices"
+              v-model="choices"
+              :value="choice.tipo"
             />
-            <span>Salame</span>
+            <span>{{ choice.tipo }}</span>
           </div>
         </div>
 
@@ -52,10 +64,70 @@
   </div>
 </template>
 <script>
+import Message from "./Message";
 export default {
   name: "BurgerForm",
+  components: {
+    Message,
+  },
   data() {
-    return {};
+    return {
+      breadsData: null,
+      meatsData: null,
+      choicesData: null,
+      name: null,
+      bread: null,
+      meat: null,
+      choices: [],
+      msg: null,
+    };
+  },
+  methods: {
+    async getIngredients() {
+      const req = await fetch("http://localhost:3000/ingredientes");
+      const data = await req.json();
+
+      this.breadsData = data.paes;
+      this.meatsData = data.carnes;
+      this.choicesData = data.opcionais;
+    },
+    async createBurger(e) {
+      e.preventDefault();
+
+      const data = {
+        nome: this.name,
+        carnes: this.meat,
+        pao: this.bread,
+        opcionais: Array.from(this.choices),
+        status: "Solicitado",
+      };
+
+      const dataJson = JSON.stringify(data);
+
+      const req = await fetch("http://localhost:3000/burgers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: dataJson,
+      });
+
+      const res = await req.json();
+
+      //limpando os campos
+      this.name = "";
+      this.meat = "";
+      this.bread = "";
+      this.choices = "";
+
+      //msg do sistema
+      this.msg = `Pedido Nº ${res.id} Realizado com sucesso!`;
+      // limpar msg sistema
+      setTimeout(() => {
+        this.msg = "";
+      }, 4000);
+    },
+  },
+  mounted() {
+    this.getIngredients();
   },
 };
 </script>
